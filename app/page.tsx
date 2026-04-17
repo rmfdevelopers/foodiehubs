@@ -8,21 +8,21 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { 
-  UtensilsCrossed, 
-  Package, 
-  Leaf, 
-  Zap, 
-  Gift, 
-  Heart, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Menu, 
-  X, 
-  ArrowRight, 
-  Loader2, 
-  CheckCheck, 
+import {
+  UtensilsCrossed,
+  Package,
+  Leaf,
+  Zap,
+  Gift,
+  Heart,
+  Phone,
+  Mail,
+  MapPin,
+  Menu,
+  X,
+  ArrowRight,
+  Loader2,
+  CheckCheck,
   ImageOff,
   Instagram,
   ChefHat,
@@ -62,12 +62,14 @@ function SafeImage({ src, alt, fill, width, height, className, priority, fallbac
     );
   }
   return (
-    <Image 
+    <Image
       src={src} alt={alt} fill={fill}
       width={!fill ? (width ?? 800) : undefined}
       height={!fill ? (height ?? 600) : undefined}
-      className={className} priority={priority}
-      onError={() => setError(true)} 
+      sizes={fill ? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" : undefined}
+      className={`${className} will-change-transform`}
+      priority={priority}
+      onError={() => setError(true)}
     />
   );
 }
@@ -75,7 +77,7 @@ function SafeImage({ src, alt, fill, width, height, className, priority, fallbac
 export default function Foodiehubs() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
-  
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll);
@@ -156,7 +158,7 @@ export default function Foodiehubs() {
             </div>
             <span className="font-heading text-2xl font-bold tracking-tight text-white uppercase">{brand.name}</span>
           </div>
-          
+
           <div className="hidden md:flex items-center gap-10">
             {['Home', 'The Snacks', 'Our Roots', 'Order'].map((link) => (
               <a key={link} href={`#${link.toLowerCase().replace(' ', '')}`} className="text-sm font-semibold text-white/70 hover:text-accent transition-colors uppercase tracking-widest">{link}</a>
@@ -194,12 +196,12 @@ export default function Foodiehubs() {
         <SafeImage src="https://images.unsplash.com/photo-1608700730717-53738b6362de" alt={brand.name} fill className="object-cover scale-105" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/50 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-transparent" />
-        <div className={`relative z-10 max-w-4xl transition-all duration-1000 ${revHero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+        <div className={`relative z-10 max-w-4xl transition-all duration-1000 will-change-transform ${revHero.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
           <h1 className="font-heading text-6xl md:text-[8rem] font-black text-white leading-[0.85] tracking-tighter uppercase">
-            Authentic <br /> Flavors, <br /><span className="text-accent">Delivered.</span>
+            Flavors, <br /><span className="text-accent">Delivered.</span>
           </h1>
-          <p className="text-white/70 mt-8 text-xl max-w-xl leading-relaxed font-light">
-            {brand.description} <span className="text-accent font-bold block mt-2">No stories, just premium crunch.</span>
+          <p className="text-white/80 mt-8 text-xl max-w-2xl leading-relaxed font-normal">
+            {brand.description}
           </p>
           <div className="flex flex-wrap gap-6 mt-12">
             <a href="#products" className="bg-accent text-white px-10 py-5 font-black text-lg uppercase tracking-widest
@@ -213,24 +215,30 @@ export default function Foodiehubs() {
       </section>
 
       {/* FEATURES Section (V4 Staggered) */}
-      <section id="features" ref={revFeat.ref} className="py-28 px-6 bg-secondary relative overflow-hidden">
+      <section id="features" ref={revFeat.ref} className="py-28 px-6 bg-[#f8f5f2] relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-[100px]" />
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="mb-20">
-            <h2 className="font-heading text-5xl md:text-6xl font-black text-primary mb-4">Why Foodiehubs?</h2>
-            <div className="w-24 h-2 bg-accent" />
-            <p className="text-primary/60 mt-6 text-xl max-w-2xl">Crafting the ultimate snack experience through heritage and quality. Lagos-certified crunch delivered to your door.</p>
+            <h2 className="font-heading text-4xl md:text-5xl font-black text-primary mb-8 uppercase tracking-tight">Why Foodiehubs?</h2>
+            <div className="flex flex-col items-start gap-4">
+              <span className="bg-accent text-white px-4 py-2 text-sm md:text-base font-bold uppercase tracking-widest inline-block">
+                Crafting the ultimate food experience through heritage and quality.
+              </span>
+              <span className="bg-accent text-white px-4 py-2 text-sm md:text-base font-bold uppercase tracking-widest inline-block">
+                Lagos-certified excellence delivered directly to your door.
+              </span>
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((f, i) => (
-              <div key={i} 
+              <div key={i}
                 style={{ transitionDelay: `${i * 150}ms` }}
-                className={`bg-white p-10 shadow-xl border border-primary/5 group transition-all duration-700 ${revFeat.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                <div className="w-16 h-16 bg-primary text-secondary flex items-center justify-center mb-8 group-hover:bg-accent transition-colors duration-500">
-                  <f.icon size={30} />
+                className={`bg-white p-8 shadow-sm border border-primary/5 transition-all duration-700 will-change-transform hover:shadow-xl hover:-translate-y-1 ${revFeat.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                <div className="w-12 h-12 bg-[#3d2b1f] text-white flex items-center justify-center mb-6">
+                  <f.icon size={20} />
                 </div>
-                <h3 className="font-heading text-2xl font-bold text-primary mb-4">{f.title}</h3>
-                <p className="text-primary/60 leading-relaxed">{f.description}</p>
+                <h3 className="font-heading text-xl font-bold text-primary mb-3 uppercase tracking-tighter">{f.title}</h3>
+                <p className="text-primary/60 text-sm leading-relaxed">{f.description}</p>
               </div>
             ))}
           </div>
@@ -244,50 +252,50 @@ export default function Foodiehubs() {
             <p className="text-accent font-heading tracking-[0.3em] uppercase mb-4">The Collection</p>
             <h2 className="font-heading text-5xl md:text-7xl font-black text-white leading-none">Signature Snacks</h2>
           </div>
-          
+
           <div className={`grid grid-cols-1 md:grid-cols-12 gap-6 transition-all duration-1000 ${revProd.isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}>
             {/* LARGE FEATURE BENTO */}
-            <div className="md:col-span-8 group relative overflow-hidden rounded-3xl h-[500px]">
+            <div className="md:col-span-8 group relative overflow-hidden rounded-3xl h-[450px] md:h-[500px]">
               <SafeImage src={products[0].image_url} alt={products[0].name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-10 w-full">
-                <div className="flex justify-between items-end">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                   <div className="max-w-md">
-                    <span className="bg-accent text-white px-3 py-1 text-xs font-bold uppercase tracking-widest rounded mb-4 inline-block">Top Pick</span>
-                    <h3 className="font-heading text-4xl font-bold text-white mb-3">{products[0].name}</h3>
-                    <p className="text-white/70 line-clamp-2 mb-6">{products[0].description}</p>
-                    <a href="#contact" className="bg-white text-primary px-8 py-3 rounded-full font-bold hover:bg-accent hover:text-white transition-all uppercase text-sm tracking-widest">Order Now</a>
+                    <span className="bg-accent text-white px-3 py-1 text-[10px] md:text-xs font-bold uppercase tracking-widest rounded mb-4 inline-block">Top Pick</span>
+                    <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">{products[0].name}</h3>
+                    <p className="text-white/70 text-sm md:text-base line-clamp-2 mb-6">{products[0].description}</p>
+                    <a href="#contact" className="inline-block bg-white text-primary px-8 py-3 rounded-full font-bold hover:bg-accent hover:text-white transition-all uppercase text-[10px] md:text-xs tracking-widest whitespace-nowrap text-center">Order Now</a>
                   </div>
-                  <span className="text-accent font-heading text-4xl font-black">{products[0].price}</span>
+                  <span className="text-accent font-heading text-3xl md:text-4xl font-black">{products[0].price}</span>
                 </div>
               </div>
             </div>
 
             {/* SMALL BENTO 1 */}
-            <div className="md:col-span-4 group relative overflow-hidden rounded-3xl h-[500px]">
+            <div className="md:col-span-4 group relative overflow-hidden rounded-3xl h-[400px] md:h-[500px]">
               <SafeImage src={products[1].image_url} alt={products[1].name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-8 w-full">
-                <h3 className="font-heading text-3xl font-bold text-white mb-2">{products[1].name}</h3>
-                <p className="text-white/70 text-sm mb-4">{products[1].description}</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full">
+                <h3 className="font-heading text-2xl md:text-3xl font-bold text-white mb-2">{products[1].name}</h3>
+                <p className="text-white/70 text-xs md:text-sm mb-4 leading-relaxed">{products[1].description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-accent font-heading text-2xl font-black">{products[1].price}</span>
+                  <span className="text-accent font-heading text-2xl md:text-2xl font-black">{products[1].price}</span>
                   <ShoppingBag size={20} className="text-white/50 group-hover:text-accent transition-colors" />
                 </div>
               </div>
             </div>
 
             {/* FULL WIDTH BENTO BOTTOM */}
-            <div className="md:col-span-12 group relative overflow-hidden rounded-3xl h-[400px]">
+            <div className="md:col-span-12 group relative overflow-hidden rounded-3xl min-h-[400px]">
               <SafeImage src={products[2].image_url} alt={products[2].name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
-              <div className="absolute inset-0 flex flex-col justify-center p-12 max-w-2xl">
-                <p className="text-accent font-bold uppercase tracking-widest mb-4">Gift The Taste</p>
-                <h3 className="font-heading text-5xl font-bold text-white mb-4 leading-tight">{products[2].name}</h3>
-                <p className="text-white/60 text-lg mb-8">{products[2].description}</p>
-                <div className="flex items-center gap-8">
+              <div className="absolute inset-0 bg-black/40 md:bg-transparent md:bg-gradient-to-r md:from-black/90 md:via-black/40 md:to-transparent" />
+              <div className="relative md:absolute inset-0 flex flex-col justify-center p-8 md:p-12 max-w-2xl bg-gradient-to-t from-black/90 via-transparent md:bg-none">
+                <p className="text-accent font-bold uppercase tracking-widest text-xs md:text-sm mb-4">Gift The Taste</p>
+                <h3 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">{products[2].name}</h3>
+                <p className="text-white/60 text-base md:text-lg mb-8">{products[2].description}</p>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 md:gap-8">
                   <span className="text-white font-heading text-3xl font-black">{products[2].price}</span>
-                  <a href="#contact" className="border-2 border-white text-white px-10 py-3 font-bold hover:bg-white hover:text-primary transition-all uppercase tracking-widest">Enquire Now</a>
+                  <a href="#contact" className="border-2 border-white text-white px-8 py-3 font-bold hover:bg-white hover:text-primary transition-all uppercase text-xs tracking-widest whitespace-nowrap">Enquire Now</a>
                 </div>
               </div>
             </div>
@@ -299,7 +307,7 @@ export default function Foodiehubs() {
       <div className="py-24 px-8 text-center bg-accent/8 border-y border-white/5 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(192,57,43,0.1),transparent_70%)]" />
         <p className="relative font-heading text-3xl md:text-6xl font-black text-secondary max-w-4xl mx-auto leading-tight italic">
-          &ldquo;Bringing the rich heritage of Command&apos;s finest flavors to your doorstep with a rustic-modern touch.&rdquo;
+          &ldquo;Crafting the ultimate food experience through heritage and quality. Lagos-certified excellence delivered directly to your door.&rdquo;
         </p>
         <p className="relative text-accent mt-8 text-xs tracking-[0.5em] uppercase font-bold">{brand.name}</p>
       </div>
@@ -313,7 +321,7 @@ export default function Foodiehubs() {
           </div>
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
             {galleryImages.map((src, i) => (
-              <div key={i} 
+              <div key={i}
                 style={{ transitionDelay: `${i * 100}ms` }}
                 className={`break-inside-avoid relative group rounded-2xl overflow-hidden shadow-xl transition-all duration-700 ${revGallery.isVisible ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-6 blur-sm'}`}>
                 <SafeImage src={src} alt={`Foodiehubs ${i}`} width={600} height={800} className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -360,31 +368,35 @@ export default function Foodiehubs() {
       </section>
 
       {/* TESTIMONIALS Section (V4 Staggered) */}
-      <section ref={revTest.ref} className="py-28 px-6 bg-secondary relative">
+      <section ref={revTest.ref} className="py-28 px-6 bg-[#f8f5f2] relative">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="font-heading text-5xl md:text-6xl font-black text-primary uppercase">What Our Foodies Say</h2>
-            <p className="text-primary/40 mt-4 text-xl">Real reviews from our community</p>
+          <div className="text-center mb-20 flex flex-col items-center">
+            <span className="bg-accent text-white px-4 py-1.5 text-sm font-bold uppercase tracking-widest mb-6">Real reviews from our community</span>
+            <h2 className="font-heading text-4xl md:text-6xl font-black text-primary uppercase sr-only">Testimonials</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {testimonials.map((t, i) => (
-              <div key={i} 
+              <div key={i}
                 style={{ transitionDelay: `${i * 200}ms` }}
-                className={`bg-white p-12 rounded-[2rem] shadow-xl border border-primary/5 relative transition-all duration-700 ${revTest.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-                <div className="absolute top-10 right-12 text-accent/10">
-                  <UtensilsCrossed size={80} />
+                className={`bg-white p-10 md:p-14 rounded-3xl shadow-sm border border-primary/5 transition-all duration-700 will-change-transform ${revTest.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                <div className="flex gap-1.5 mb-8">
+                  {[1, 2, 3, 4, 5].map(n => <div key={n} className="w-1.5 h-1.5 rounded-full bg-accent" />)}
                 </div>
-                <div className="flex gap-1 mb-6">
-                  {[1,2,3,4,5].map(n => <div key={n} className="w-1.5 h-1.5 rounded-full bg-accent" />)}
+                <div className="relative mb-12">
+                  <span className="text-accent text-6xl font-serif absolute -top-8 -left-4 opacity-10 leading-none">&ldquo;</span>
+                  <p className="relative z-10">
+                    <span className="bg-accent text-white text-xl md:text-2xl leading-[1.6] font-bold italic py-1 px-2 box-decoration-clone inline transition-all">
+                      {t.text}
+                    </span>
+                  </p>
                 </div>
-                <p className="text-primary/80 text-2xl leading-relaxed italic mb-10 relative z-10">&ldquo;{t.text}&rdquo;</p>
-                <div className="flex items-center gap-4 border-t border-primary/5 pt-8">
-                  <div className="w-14 h-14 rounded-full bg-primary text-secondary flex items-center justify-center font-heading text-xl font-bold">
+                <div className="flex items-center gap-5 border-t border-primary/5 pt-10">
+                  <div className="w-16 h-16 rounded-full bg-primary text-secondary flex items-center justify-center font-heading text-2xl font-black">
                     {t.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-bold text-primary text-lg">{t.name}</p>
-                    <p className="text-accent text-xs font-bold tracking-widest uppercase">{t.role}</p>
+                    <p className="font-bold text-primary text-xl tracking-tighter uppercase">{t.name}</p>
+                    <p className="text-accent text-xs font-black tracking-[0.2em] uppercase mt-1">{t.role}</p>
                   </div>
                 </div>
               </div>
@@ -398,12 +410,12 @@ export default function Foodiehubs() {
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)]" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-20 items-start relative z-10">
           <div className={`transition-all duration-1000 ${revContact.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <h2 className="font-heading text-6xl md:text-8xl font-black text-white leading-[0.9] mb-8 uppercase">Place Your <br /><span className="text-accent">Order</span></h2>
             <p className="text-white/50 text-xl leading-relaxed max-w-md mb-12">Craving the taste of home? Send us a message and we&apos;ll get your heritage snacks sorted.</p>
-            
+
             <div className="space-y-8">
               <div className="flex items-start gap-5 group">
                 <div className="bg-white/5 p-4 rounded-xl group-hover:bg-accent transition-colors">
@@ -538,7 +550,7 @@ function ContactForm() {
               className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-white placeholder-white/20 text-sm outline-none transition-all duration-300 focus:bg-white/10 focus:border-accent focus:ring-1 focus:ring-accent"
             />
           </div>
-          <textarea 
+          <textarea
             rows={4} placeholder="What snacks are you craving?"
             value={form.message}
             onChange={e => setForm(prev => ({ ...prev, message: e.target.value }))}
